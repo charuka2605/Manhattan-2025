@@ -1,0 +1,17 @@
+<div>
+  <ngb-alert [dismissible]="true" class="text-center">
+    Note that this app is built using Angular 20. The APIs in Angular <= 16 are significantly
+    different.
+  </ngb-alert>
+
+  <app-menu></app-menu>
+
+  <div class="container my-4">
+    <!-- <app-home></app-home> -->
+
+    <!--
+            Show the component selected based on the URL, here...
+        --><router-outlet
+    ></router-outlet>
+  </div>
+</div>

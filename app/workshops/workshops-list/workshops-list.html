@@ -1,0 +1,50 @@
+<!-- @if ( loading ) {
+    <div>Loading data...</div>
+}
+@if( !loading && error ) {
+    <div>{{ error.message }}</div>
+}
+
+@if ( !loading && workshops ) {
+    <div>Number of workshops = {{ workshops.length }}</div>
+} -->
+
+<div *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<app-error-alert [err]="error" [loading]="loading"></app-error-alert>
+
+<div *ngIf="!loading && workshops">
+    
+<app-pagination
+  [page]="page"
+  (pageChange)="changePage($event)"
+></app-pagination>
+
+
+<input
+    type="search"
+    class="form-control"
+    placeholder="Type to search by name"
+    [(ngModel)]="filterKey" 
+
+    (input)="filterWorkshops()"
+/>
+
+@if ( filterKey !== '' ) {
+    <div>
+        Workshops whose name has
+        <span class="text-primary">{{ filterKey }}</span> are shown.
+    </div>
+}
+    <div class="row">
+        <!-- Explore use of *ngFor directive (old way) -->
+        @for ( workshop of filteredWorkshops; track workshop.id ) {
+        <div class="col-12 col-md-6 col-lg-4 my-3 d-flex">
+            <app-item [workshop]="workshop"></app-item>
+        </div>
+        }
+    </div>
+</div>
+ 
